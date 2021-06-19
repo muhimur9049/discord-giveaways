@@ -221,7 +221,7 @@ class GiveawaysManager extends EventEmitter {
                 lastChance: options.lastChance
             });
             const embed = this.generateMainEmbed(giveaway);
-            const message = await channel.send({ content: giveaway.messages.giveaway, embeds: [embed] });
+            const message = await channel.send({ content: giveaway.messages.giveaway, embed: embed });
             message.react(giveaway.reaction);
             giveaway.messageID = message.id;
             this.giveaways.push(giveaway);
