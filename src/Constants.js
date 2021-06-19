@@ -21,7 +21,7 @@ const Discord = require('discord.js');
  * @property {string} [units.days='days'] The name of the 'days' units
  * @property {Boolean} [units.pluralS='false'] Whether to force removing the "S" which marks the plural when the value is lower than 2
  */
-exports.GiveawayMessages = {};
+exports.GiveawayMessages = {}; 
 
 /**
  * The start options for new giveaways
