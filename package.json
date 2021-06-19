@@ -1,6 +1,6 @@
 {
   "name": "@muhimur/discord-giveaways",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A complete framework to facilitate the creation of giveaways using discord.js master branch.",
   "main": "index.js",
   "types": "typings/index.d.ts",
