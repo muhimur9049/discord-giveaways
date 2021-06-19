@@ -509,10 +509,11 @@ class Giveaway extends EventEmitter {
                 if (messageString.length <= 2000) this.message.channel.send(messageString);
                 else {
                     this.message.channel.send(
-                        { content: this.messages.winMessage }
+                        { content: this.messages.winMessage 
                             .substr(0, this.messages.winMessage.indexOf('{winners}'))
                             .replace('{prize}', this.prize)
                             .replace('{messageURL}', this.messageURL)
+                        }
                     );
                     while (formattedWinners.length >= 2000) {
                         await this.message.channel.send(formattedWinners.substr(0, formattedWinners.lastIndexOf(',', 1999)) + ',');
@@ -520,10 +521,11 @@ class Giveaway extends EventEmitter {
                     }
                     this.message.channel.send(formattedWinners);
                     this.message.channel.send(
-                        { content: this.messages.winMessage }
+                        { content: this.messages.winMessage 
                             .substr(this.messages.winMessage.indexOf('{winners}') + 9)
                             .replace('{prize}', this.prize)
                             .replace('{messageURL}', this.messageURL)
+                        }
                     );
                 }
                 resolve(winners);
@@ -566,10 +568,11 @@ class Giveaway extends EventEmitter {
                 if (messageString.length <= 2000) this.message.channel.send(messageString);
                 else {
                     this.message.channel.send(
-                        { content: options.messages.congrat }
+                        { content: options.messages.congrat 
                             .substr(0, options.messages.congrat.indexOf('{winners}'))
                             .replace('{prize}', this.prize)
                             .replace('{messageURL}', this.messageURL)
+                        }
                     );
                     while (formattedWinners.length >= 2000) {
                         await this.message.channel.send(formattedWinners.substr(0, formattedWinners.lastIndexOf(',', 1999)) + ',');
@@ -577,10 +580,11 @@ class Giveaway extends EventEmitter {
                     }
                     this.message.channel.send(formattedWinners);
                     this.message.channel.send(
-                        { content: options.messages.congrat }
+                        { content: options.messages.congrat 
                             .substr(options.messages.congrat.indexOf('{winners}') + 9)
                             .replace('{prize}', this.prize)
                             .replace('{messageURL}', this.messageURL)
+                        }
                     );
                 }
                 resolve(winners);
