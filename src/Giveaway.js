@@ -500,27 +500,27 @@ class Giveaway extends EventEmitter {
                 this.winnerIDs = winners.map((w) => w.id);
                 await this.manager.editGiveaway(this.messageID, this.data);
                 const embed = this.manager.generateEndEmbed(this, winners);
-                await this.message.edit({ content: this.messages.giveawayEnded, embeds: [embed] }).catch(() => { });
+                await this.message.edit({ content: this.messages.giveawayEnded, embed: embed }).catch(() => { });
                 let formattedWinners = winners.map((w) => `<@${w.id}>`).join(', ');
                 const messageString = this.messages.winMessage
                     .replace('{winners}', formattedWinners)
                     .replace('{prize}', this.prize)
                     .replace('{messageURL}', this.messageURL);
-                if (messageString.length <= 2000) this.message.channel.send({ content: messageString });
+                if (messageString.length <= 2000) this.message.channel.send(messageString);
                 else {
                     this.message.channel.send(
-                        this.messages.winMessage
+                        { content: this.messages.winMessage }
                             .substr(0, this.messages.winMessage.indexOf('{winners}'))
                             .replace('{prize}', this.prize)
                             .replace('{messageURL}', this.messageURL)
                     );
                     while (formattedWinners.length >= 2000) {
-                        await this.message.channel.send({content: formattedWinners.substr(0, formattedWinners.lastIndexOf(',', 1999)) + ','});
+                        await this.message.channel.send(formattedWinners.substr(0, formattedWinners.lastIndexOf(',', 1999)) + ',');
                         formattedWinners = formattedWinners.slice(formattedWinners.substr(0, formattedWinners.lastIndexOf(',', 1999) + 2).length);
                     }
-                    this.message.channel.send({ content: formattedWinners });
+                    this.message.channel.send(formattedWinners);
                     this.message.channel.send(
-                        this.messages.winMessage
+                        { content: this.messages.winMessage }
                             .substr(this.messages.winMessage.indexOf('{winners}') + 9)
                             .replace('{prize}', this.prize)
                             .replace('{messageURL}', this.messageURL)
@@ -529,7 +529,7 @@ class Giveaway extends EventEmitter {
                 resolve(winners);
             } else {
                 const embed = this.manager.generateNoValidParticipantsEndEmbed(this);
-                this.message.edit({ content: this.messages.giveawayEnded, embeds: [embed] }).catch(() => { });
+                this.message.edit({ content: this.messages.giveawayEnded, embed: embed }).catch(() => { });
                 resolve([]);
             }
         });
@@ -557,16 +557,16 @@ class Giveaway extends EventEmitter {
                 this.winnerIDs = winners.map((w) => w.id);
                 await this.manager.editGiveaway(this.messageID, this.data);
                 const embed = this.manager.generateEndEmbed(this, winners);
-                await this.message.edit({ content: this.messages.giveawayEnded, embeds: [embed] }).catch(() => { });
+                await this.message.edit({ content: this.messages.giveawayEnded, embed: embed }).catch(() => { });
                 let formattedWinners = winners.map((w) => `<@${w.id}>`).join(', ');
                 const messageString = options.messages.congrat
                     .replace('{winners}', formattedWinners)
                     .replace('{prize}', this.prize)
                     .replace('{messageURL}', this.messageURL);
-                if (messageString.length <= 2000) this.message.channel.send({ content: messageString });
+                if (messageString.length <= 2000) this.message.channel.send(messageString);
                 else {
                     this.message.channel.send(
-                        options.messages.congrat
+                        { content: options.messages.congrat }
                             .substr(0, options.messages.congrat.indexOf('{winners}'))
                             .replace('{prize}', this.prize)
                             .replace('{messageURL}', this.messageURL)
@@ -575,9 +575,9 @@ class Giveaway extends EventEmitter {
                         await this.message.channel.send(formattedWinners.substr(0, formattedWinners.lastIndexOf(',', 1999)) + ',');
                         formattedWinners = formattedWinners.slice(formattedWinners.substr(0, formattedWinners.lastIndexOf(',', 1999) + 2).length);
                     }
-                    this.message.channel.send({ content: formattedWinners });
+                    this.message.channel.send(formattedWinners);
                     this.message.channel.send(
-                        options.messages.congrat
+                        { content: options.messages.congrat }
                             .substr(options.messages.congrat.indexOf('{winners}') + 9)
                             .replace('{prize}', this.prize)
                             .replace('{messageURL}', this.messageURL)
