@@ -506,7 +506,7 @@ class Giveaway extends EventEmitter {
                     .replace('{winners}', formattedWinners)
                     .replace('{prize}', this.prize)
                     .replace('{messageURL}', this.messageURL);
-                if (messageString.length <= 2000) this.message.channel.send(messageString);
+                if (messageString.length <= 2000) this.message.channel.send({ content: messageString });
                 else {
                     this.message.channel.send(
                         this.messages.winMessage
@@ -515,10 +515,10 @@ class Giveaway extends EventEmitter {
                             .replace('{messageURL}', this.messageURL)
                     );
                     while (formattedWinners.length >= 2000) {
-                        await this.message.channel.send(formattedWinners.substr(0, formattedWinners.lastIndexOf(',', 1999)) + ',');
+                        await this.message.channel.send({ content: formattedWinners.substr(0, formattedWinners.lastIndexOf(',', 1999)) + ',' });
                         formattedWinners = formattedWinners.slice(formattedWinners.substr(0, formattedWinners.lastIndexOf(',', 1999) + 2).length);
                     }
-                    this.message.channel.send(formattedWinners);
+                    this.message.channel.send({ embeds: [formattedWinners] });
                     this.message.channel.send(
                         this.messages.winMessage
                             .substr(this.messages.winMessage.indexOf('{winners}') + 9)
@@ -572,10 +572,10 @@ class Giveaway extends EventEmitter {
                             .replace('{messageURL}', this.messageURL)
                     );
                     while (formattedWinners.length >= 2000) {
-                        await this.message.channel.send(formattedWinners.substr(0, formattedWinners.lastIndexOf(',', 1999)) + ',');
+                        await this.message.channel.send({ content: formattedWinners.substr(0, formattedWinners.lastIndexOf(',', 1999)) + ',' });
                         formattedWinners = formattedWinners.slice(formattedWinners.substr(0, formattedWinners.lastIndexOf(',', 1999) + 2).length);
                     }
-                    this.message.channel.send(formattedWinners);
+                    this.message.channel.send({ embeds: [formattedWinners] });
                     this.message.channel.send(
                         options.messages.congrat
                             .substr(options.messages.congrat.indexOf('{winners}') + 9)
