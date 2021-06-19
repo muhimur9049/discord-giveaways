@@ -414,14 +414,14 @@ class GiveawaysManager extends EventEmitter {
                 return;
             }
             const embed = this.generateMainEmbed(giveaway, giveaway.lastChance.enabled && giveaway.remainingTime < giveaway.lastChance.threshold);
-            giveaway.message.edit({ content: giveaway.messages.giveaway, embed: embed }).catch(() => { });
+            giveaway.message.edit({ content: giveaway.messages.giveaway, embeds: [embed] }).catch(() => { });
             if (giveaway.remainingTime < this.options.updateCountdownEvery) {
                 setTimeout(() => this.end.call(this, giveaway.messageID), giveaway.remainingTime);
             }
             if (giveaway.lastChance.enabled && (giveaway.remainingTime - giveaway.lastChance.threshold) < this.options.updateCountdownEvery) {
                 setTimeout(() => {
                     const embed = this.generateMainEmbed(giveaway, true);
-                    giveaway.message.edit({ content: giveaway.messages.giveaway, embed: embed }).catch(() => { });
+                    giveaway.message.edit({ content: giveaway.messages.giveaway, embeds: [embed] }).catch(() => { });
                 }, giveaway.remainingTime - giveaway.lastChance.threshold);
             }
         });
